@@ -1,3 +1,53 @@
-<h1 class="text-3xl font-bold underline text-red-500">
-  Hello world!
-</h1>
+<div class="relative w-full text-white overflow-hidden flex flex-col min-h-screen">
+
+<img
+    src="assets/images/bg-home.jpg"
+    alt="Background"
+    class="absolute top-0 left-0 w-full -z-10"
+    style="height: auto;"
+  />
+
+  <div class="w-full max-w-7xl mx-auto px-6">
+    <header class="flex justify-between items-center py-6">
+      <h1 class="text-4xl font-bold text-red-600">CINETRACK</h1>
+      <button (click)="irParaLogin()"
+              class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded flex items-center gap-2 transition duration-500 ease-in-out bg-red-700 hover:bg-red-800 transform hover:-translate-y-1 hover:scale-110">
+        Entrar
+      </button>
+    </header>
+
+    <div class="flex justify-center text-center py-64">
+      <p class="text-xl md:text-2xl font-semibold max-w-3xl">
+        Organize suas séries, filmes e programas de TV, <br />
+        e mantenha-se por dentro das novidades
+      </p>
+    </div>
+
+    <div class="py-40">
+      <h2 class="text-center text-4xl">
+        Descubra o que está em alta
+      </h2>
+
+      <div class="grid grid-cols-2 gap-4 pb-14 py-24">
+        <div class="bg-black/60 rounded-md h-48 flex items-end justify-center hover:bg-black/80 transition">
+          <span class="text-white mb-4">MAIS INFO.</span>
+        </div>
+        <div class="bg-black/60 rounded-md h-48 flex items-end justify-center hover:bg-black/80 transition">
+          <span class="text-white mb-4">MAIS INFO.</span>
+        </div>
+        <div class="bg-black/60 rounded-md h-48 flex items-end justify-center hover:bg-black/80 transition">
+          <span class="text-white mb-4">MAIS INFO.</span>
+        </div>
+        <div class="bg-black/60 rounded-md h-48 flex items-end justify-center hover:bg-black/80 transition">
+          <span class="text-white mb-4">MAIS INFO.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="bg-red-800 w-full h-24 flex items-center justify-center">
+    <p class="text-white text-lg">© 2025 CineTrack - Todos os direitos reservados</p>
+  </footer>
+
+</div>
