@@ -1,7 +1,8 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Inter', sans-serif; }
