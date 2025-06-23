@@ -56,7 +56,7 @@ export class LoginPageComponent {
             showConfirmButton: false,
             timer: 1500
           }).then(() => {
-            this.router.navigate(['/']);
+            this.router.navigate(['filmes']);
           });
         } else {
           Swal.fire({
