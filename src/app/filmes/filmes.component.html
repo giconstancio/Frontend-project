@@ -1,0 +1,61 @@
+<div class="bg-black w-full text-white flex flex-col min-h-screen">
+    <nav class="bg-black text-white gap-8 flex px-8 py-4 items-center">
+        <div class="text-2xl font-bold text-red-600">CINETRACK</div>
+        <a href="#" class="text-sm hover:text-gray-300">Minha Lista</a>
+    </nav>
+
+    <div class="flex justify-between items-center px-8 py-2">
+        <h1 class="font-sans">Filmes para assistir ></h1>
+        <button (click)="abrirFormulario()"
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded flex items-center gap-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+            Adicionar filme
+        </button>
+    </div>
+
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <mat-card *ngIf="mostrarFormulario"
+            class="bg-gray-900 p-8 rounded-lg shadow-2xl text-gray-100 border border-red-700 w-full max-w-2xl">
+            <mat-card-header class="mb-6">
+                <mat-card-title class="text-3xl font-bold text-red-600 text-center">Adicionar Novo
+                    Filme</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="bg-black">
+                <form class="flex flex-col space-y-6">
+                    <div class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+                        <mat-form-field appearance="outline" class="w-full md:w-1/2">
+                            <mat-label class="text-gray-300">Título</mat-label>
+                            <input type="text" matInput placeholder="Digite o título do filme"
+                                [(ngModel)]="novoFilme.titulo" name="titulo"
+                                class="bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="w-full md:w-1/2">
+                            <mat-label class="text-gray-300">Descrição</mat-label>
+                            <textarea matInput placeholder="Digite a descrição do filme"
+                                [(ngModel)]="novoFilme.descricao" name="descricao"
+                                class="bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-gray-100 placeholder-gray-400 h-24 resize-y focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600"></textarea>
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label class="text-gray-300">Status</mat-label>
+                        <mat-radio-group [(ngModel)]="novoFilme.status" name="status"
+                            class="flex flex-col md:flex-row md:space-x-6 space-y-2 md:space-y-0">
+                            <mat-radio-button [value]="StatusFilme.Assistido"
+                                class="text-gray-100">Assistido</mat-radio-button>
+                            <mat-radio-button [value]="StatusFilme.NaoAssistido" class="text-gray-100">Não
+                                Assistido</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+
+            <mat-card-actions class="flex justify-center mt-6">
+                <button mat-flat-button (click)="adicionarFilme()"
+                    class="bg-red-700 text-white hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out text-lg">
+                    Adicionar Filme
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
