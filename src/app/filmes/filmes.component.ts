@@ -64,14 +64,4 @@ export class FilmesComponent {
     this.listaFilmes.splice(index, 1);
   }
 
-  compartilharFilme(id: number | undefined) {
-    if (!id) return;
-
-    const linkCompartilhamento = `http://localhost:4200/filme/${id}`;
-
-    navigator.clipboard.writeText(linkCompartilhamento)
-      .then(() => alert('Link copiado para a área de transferência!'))
-      .catch(() => alert('Não foi possível copiar o link.'));
-  }
-
 }
