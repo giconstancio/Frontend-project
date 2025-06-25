@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Filme, StatusFilme } from './model/filme';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
@@ -21,6 +20,7 @@ export class FilmesComponent {
   public StatusFilme = StatusFilme;
   listaFilmes: Filme[] = [];
   novoFilme: Filme = new Filme('', '', StatusFilme.NaoAssistido);
+  filtroStatus: string = 'todos';
 
   abrirFormulario() {
     this.mostrarFormulario = true;
@@ -30,5 +30,12 @@ export class FilmesComponent {
   adicionarFilme() {
     this.listaFilmes.push(this.novoFilme);
     this.mostrarFormulario = false;
+  }
+
+  listaFilmesFiltrada(): Filme[] {
+    if (this.filtroStatus === 'todos') {
+      return this.listaFilmes;
+    }
+    return this.listaFilmes.filter(filme => filme.status === this.filtroStatus);
   }
 }
