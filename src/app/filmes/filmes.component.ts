@@ -1,78 +1,90 @@
-import {Component} from '@angular/core';
-import {Filme, StatusFilme} from './model/filme';
-import {CommonModule} from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { Filme, StatusFilme } from '../filmes/model/filme';
 
 @Component({
   selector: 'app-filmes',
-  imports: [
-    CommonModule,
-    MatRadioModule,
-    MatCardModule,
-    MatButtonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-  ],
+  standalone: true,
   templateUrl: './filmes.component.html',
-  styleUrls: ['./filmes.component.css']
+  styleUrls: ['./filmes.component.css'],
+  imports: [CommonModule, FormsModule, RouterModule]
 })
-
 export class FilmesComponent {
-  mostrarFormulario = false;
-  public StatusFilme = StatusFilme;
+  StatusFilme = StatusFilme;
   listaFilmes: Filme[] = [];
   novoFilme: Filme = new Filme('', '', StatusFilme.NaoAssistido);
-  filtroTitulo: string = '';
+  mostrarFormulario = false;
+  modoEdicao = false;
+  filtroTitulo = '';
   filtroStatus: string = '';
-  modoEdicao: boolean = false;
-  private proximoId = 1;
+  indiceEdicao: number = -1;
+
+  constructor() {
+    this.carregarFilmesDoStorage();
+  }
+
+  carregarFilmesDoStorage() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const filmesJson = localStorage.getItem('listaFilmes');
+      if (filmesJson) {
+        this.listaFilmes = JSON.parse(filmesJson);
+      }
+    }
+  }
+
+  salvarFilmesNoStorage() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('listaFilmes', JSON.stringify(this.listaFilmes));
+    }
+  }
 
   abrirFormulario() {
     this.mostrarFormulario = true;
+    this.modoEdicao = false;
     this.novoFilme = new Filme('', '', StatusFilme.NaoAssistido);
   }
 
   adicionarFilme() {
-    this.novoFilme.id = this.proximoId++;
-    this.listaFilmes.push(this.novoFilme);
+    if (this.modoEdicao) {
+      this.listaFilmes[this.indiceEdicao] = { ...this.novoFilme };
+    } else {
+      this.listaFilmes.push(new Filme(this.novoFilme.titulo, this.novoFilme.descricao, this.novoFilme.status));
+    }
+    this.salvarFilmesNoStorage();
     this.mostrarFormulario = false;
-    this.modoEdicao = false;
   }
 
-  listaFilmesFiltrados(): Filme[] {
+  editarFilme(index: number) {
+    this.modoEdicao = true;
+    this.mostrarFormulario = true;
+    this.indiceEdicao = index;
+    this.novoFilme = { ...this.listaFilmes[index] };
+  }
+
+  excluirFilme(index: number) {
+    this.listaFilmes.splice(index, 1);
+    this.salvarFilmesNoStorage();
+  }
+
+  alterarStatus(index: number) {
+    const filme = this.listaFilmes[index];
+    filme.status = filme.status === StatusFilme.Assistido ? StatusFilme.NaoAssistido : StatusFilme.Assistido;
+    this.salvarFilmesNoStorage();
+  }
+
+  listaFilmesFiltrados() {
     return this.listaFilmes.filter(filme => {
-      const tituloMatch = filme.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase());
+      const tituloMatch = this.filtroTitulo === '' || filme.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase());
       const statusMatch = this.filtroStatus === '' || filme.status === this.filtroStatus;
       return tituloMatch && statusMatch;
     });
   }
 
-  editarFilme(index: number) {
-    const filme = this.listaFilmes[index];
-    this.novoFilme = new Filme(filme.titulo, filme.descricao, filme.status, filme.id);
-    this.mostrarFormulario = true;
-    this.modoEdicao = true;
-    this.listaFilmes.splice(index, 1);
-  }
-
-  excluirFilme(index: number) {
-    this.listaFilmes.splice(index, 1);
-  }
-
-  alterarStatus(index: number) {
-    if (index >= 0 && index < this.listaFilmes.length) {
-      const filme = this.listaFilmes[index];
-      filme.status = (filme.status === StatusFilme.Assistido) ? StatusFilme.NaoAssistido : StatusFilme.Assistido;
-      this.listaFilmes = [...this.listaFilmes];
+  compartilharFilme(id: number) {
+    if (typeof window !== 'undefined') {
+      window.open(`/filmes/${id}`, '_blank');
     }
   }
-
 }

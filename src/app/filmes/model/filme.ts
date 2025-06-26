@@ -13,6 +13,10 @@ export class Filme {
     this.titulo = titulo;
     this.descricao = descricao;
     this.status = status;
-    this.id = id;
+    this.id = id ?? gerarId();
   }
+}
+
+function gerarId(): number {
+  return Math.floor(Math.random() * 1000000);
 }
