@@ -1,7 +1,23 @@
 <div class="bg-black w-full text-white flex flex-col min-h-screen">
-  <nav class="bg-black text-white gap-8 flex px-4 sm:px-8 py-4 items-center">
-    <div class="text-2xl font-bold text-red-600">CINETRACK</div>
-    <a href="#" class="text-sm hover:text-gray-300">Minha Lista</a>
+  <nav class="bg-black text-white flex justify-between items-center px-4 sm:px-8 py-4">
+    <div class="flex items-center gap-8">
+      <div class="text-2xl font-bold text-red-600">CINETRACK</div>
+      <a href="#" class="text-sm hover:text-gray-300">Minha Lista</a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <img
+        src="assets/images/profile-user.png"
+        alt="Usuário"
+        class="w-10 h-10"
+      />
+      <button
+        (click)="sair()"
+        class="text-sm bg-red-600 hover:bg-red-700 px-3 py-1 rounded transition"
+      >
+        Sair
+      </button>
+    </div>
   </nav>
 
   <main class="w-full overflow-x-hidden flex-1">
@@ -125,27 +141,16 @@
             <button class="p-1">
               <img src="assets/images/share.png" alt="Compartilhar" class="w-5 h-5">
             </button>
+
+            <button
+              class="p-1"
+              (click)="alterarStatus(i)"
+            >
+              <img src="assets/images/arrow.png" alt="Alterar" class="w-5 h-5">
+            </button>
           </div>
         </div>
       </div>
     </div>
   </main>
-          <button
-            class="p-1"
-
-          >
-            <img src="assets/images/share.png" alt="Compartilhar" class="w-5 h-5">
-          </button>
-
-          <button
-            class="p-1"
-            (click)="alterarStatus(i)"
-          >
-            <img src="assets/images/arrow.png" alt="Alterar" class="w-5 h-5">
-          </button>
-
-        </div>
-      </div>
-    </div>
-  </div>
 </div>

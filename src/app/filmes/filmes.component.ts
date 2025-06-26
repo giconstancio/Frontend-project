@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { Router } from '@angular/router';
 import {Filme, StatusFilme} from './model/filme';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
@@ -34,6 +35,8 @@ export class FilmesComponent {
   filtroStatus: string = '';
   modoEdicao: boolean = false;
   private proximoId = 1;
+
+  constructor(private router: Router) {}
 
   abrirFormulario() {
     this.mostrarFormulario = true;
@@ -73,6 +76,13 @@ export class FilmesComponent {
       filme.status = (filme.status === StatusFilme.Assistido) ? StatusFilme.NaoAssistido : StatusFilme.Assistido;
       this.listaFilmes = [...this.listaFilmes];
     }
+  }
+
+  sair() {
+    localStorage.removeItem('usuarioLogado');
+    localStorage.clear();
+
+    this.router.navigate(['/logout-page']);
   }
 
 }

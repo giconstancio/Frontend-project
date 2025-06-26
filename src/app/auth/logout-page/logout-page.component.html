@@ -1,0 +1,24 @@
+<div class="flex flex-col items-center justify-center min-h-screen bg-black text-white px-4">
+  <div class="w-full max-w-md bg-zinc-900 rounded-2xl shadow-lg p-8 sm:p-10 text-center">
+
+    <div class="w-16 h-16 mx-auto mb-6">
+      <img src="assets/images/camera.png" alt="CineTrack Logo" class="w-full h-full object-contain" />
+    </div>
+
+    <h1 class="text-2xl sm:text-3xl font-bold text-red-600 mb-2">Você saiu!</h1>
+
+    <div class="text-sm sm:text-base text-gray-300 mb-4">
+      <ng-container *ngIf="countdown > 0">
+        Redirecionando para o login em {{ countdown }} segundo{{ countdown > 1 ? 's' : '' }}...
+      </ng-container>
+      <ng-container *ngIf="countdown === 0">
+        Redirecionando agora...
+      </ng-container>
+    </div>
+
+    <div class="text-sm sm:text-base">
+      <span>Deseja entrar novamente?</span>
+      <a [routerLink]="['/login']" class="text-red-500 hover:underline ml-1">Clique aqui</a>
+    </div>
+  </div>
+</div>
