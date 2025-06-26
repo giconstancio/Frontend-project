@@ -1,6 +1,25 @@
-# FrontEndProject
+# 🎬 CineTrack - Lista Interativa de Filmes
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+
+## 👥 Integrantes
+
+- [@giconstancio](https://github.com/giconstancio)
+- [@mikisazaka](https://github.com/mikisazaka)
+- [@simplicioJoao](https://github.com/simplicioJoao)
+
+## Tecnologias Utilizadas
+
+- Angular: Framework front-end
+- HTML5: Marcação da interface
+- TailwindCSS: Estilização
+- TypeScript: Linguagem de programação
+
+## Resumo
+
+O projeto **CineTrack** é uma aplicação web desenvolvida com Angular que simula uma lista de filmes interativa. Ele oferece uma experiência simples, porém funcional, de gerenciamento de filmes, permitindo que o usuário adicione, edite, remova, filtre por status (assistido ou não assistido) e compartilhe filmes através de links individuais. Também conta com um sistema de autenticação simulada para organização e controle dos dados.  
+
+O objetivo principal é demonstrar, de forma prática, o uso dos principais conceitos do Angular em um projeto front-end completo, com foco em componentes, rotas, formulários, serviços e interação com o usuário.
 
 ## Development server
 
