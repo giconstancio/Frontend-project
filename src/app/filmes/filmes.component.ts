@@ -32,6 +32,7 @@ export class FilmesComponent {
   novoFilme: Filme = new Filme('', '', StatusFilme.NaoAssistido);
   filtroTitulo: string = '';
   filtroStatus: string = '';
+  modoEdicao: boolean = false;
   private proximoId = 1;
 
   abrirFormulario() {
@@ -43,6 +44,7 @@ export class FilmesComponent {
     this.novoFilme.id = this.proximoId++;
     this.listaFilmes.push(this.novoFilme);
     this.mostrarFormulario = false;
+    this.modoEdicao = false;
   }
 
   listaFilmesFiltrados(): Filme[] {
@@ -57,6 +59,7 @@ export class FilmesComponent {
     const filme = this.listaFilmes[index];
     this.novoFilme = new Filme(filme.titulo, filme.descricao, filme.status, filme.id);
     this.mostrarFormulario = true;
+    this.modoEdicao = true;
     this.listaFilmes.splice(index, 1);
   }
 
