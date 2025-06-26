@@ -5,3 +5,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Inter', sans-serif; }
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #a0aec0;
+  border-radius: 4px;
+}

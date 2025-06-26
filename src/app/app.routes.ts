@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
 
@@ -20,12 +21,17 @@ export const routes: Routes = [
 
   {
     path: 'filmes',
+    canActivate: [AuthGuard],
     loadComponent: () => import("./filmes/filmes.component").then(c => c.FilmesComponent)
   },
 
   {
     path: 'filmes/:id',
     loadComponent: () => import('./filme-detalhes/filme-detalhes.component').then(c => c.FilmeDetalhesComponent)
-  }
+  },
 
+  {
+    path: 'logout-page',
+    loadComponent: () => import("./auth/logout-page/logout-page.component").then(c => c.LogoutPageComponent)
+  },
 ];

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -20,8 +21,9 @@ export class FilmesComponent {
   filtroTitulo = '';
   filtroStatus: string = '';
   indiceEdicao: number = -1;
+  private proximoId = 1;
 
-  constructor() {
+  constructor(private router: Router) {
     this.carregarFilmesDoStorage();
   }
 
@@ -80,6 +82,14 @@ export class FilmesComponent {
       const statusMatch = this.filtroStatus === '' || filme.status === this.filtroStatus;
       return tituloMatch && statusMatch;
     });
+  }
+
+  sair() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('usuarioLogado');
+      localStorage.clear();
+    }
+    this.router.navigate(['/logout-page']);
   }
 
   compartilharFilme(id: number) {
