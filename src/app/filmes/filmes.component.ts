@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { Filme, StatusFilme } from './model/filme';
-import { CommonModule } from '@angular/common';
+import {Component} from '@angular/core';
+import {Filme, StatusFilme} from './model/filme';
+import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-filmes',
@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   templateUrl: './filmes.component.html',
   styleUrls: ['./filmes.component.css']
@@ -65,6 +65,14 @@ export class FilmesComponent {
 
   excluirFilme(index: number) {
     this.listaFilmes.splice(index, 1);
+  }
+
+  alterarStatus(index: number) {
+    if (index >= 0 && index < this.listaFilmes.length) {
+      const filme = this.listaFilmes[index];
+      filme.status = (filme.status === StatusFilme.Assistido) ? StatusFilme.NaoAssistido : StatusFilme.Assistido;
+      this.listaFilmes = [...this.listaFilmes];
+    }
   }
 
 }
