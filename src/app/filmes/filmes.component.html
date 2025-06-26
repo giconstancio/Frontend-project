@@ -6,11 +6,7 @@
     </div>
 
     <div class="flex items-center gap-4">
-      <img
-        src="assets/images/profile-user.png"
-        alt="Usuário"
-        class="w-10 h-10"
-      />
+      <img src="assets/images/profile-user.png" alt="Usuário" class="w-10 h-10" />
       <button
         (click)="sair()"
         class="text-sm bg-red-600 hover:bg-red-700 px-3 py-1 rounded transition"
@@ -22,132 +18,176 @@
 
   <main class="w-full overflow-x-hidden flex-1">
     <div class="flex flex-col gap-4 px-4 sm:px-8 py-4">
-      <div>
-        <input
-          type="text"
-          placeholder="Pesquisar por título"
-          [(ngModel)]="filtroTitulo"
-          class="p-2 rounded border border-gray-300 bg-gray-100 text-black w-full sm:max-w-md focus:outline-none focus:ring-2 focus:ring-red-500"
-        />
-      </div>
+      <div class="flex flex-wrap items-center justify-between gap-5 px-4 sm:px-8 py-4">
+  <!-- Container da barra de pesquisa + filtros juntos -->
+  <div class="flex items-center gap-4 flex-wrap">
+    <input
+      type="text"
+      placeholder="Pesquisar por título"
+      [(ngModel)]="filtroTitulo"
+      class="p-2 rounded border border-gray-300 bg-gray-100 text-black w-60 focus:outline-none focus:ring-2 focus:ring-red-500"
+    />
 
-      <div class="flex flex-wrap sm:flex-nowrap gap-2 overflow-x-auto sm:overflow-visible whitespace-nowrap sm:whitespace-normal scrollbar-thin pr-2">
-        <button
-          class="px-4 py-2 rounded-lg border flex-shrink-0"
-          [ngClass]="{
-            'bg-red-600 text-red-100 border-red-100': filtroStatus === '',
-            'bg-red-100 text-red-900 border-red-600': filtroStatus !== ''
-          }"
-          (click)="filtroStatus = ''"
-        >
-          Todos
-        </button>
+    <div class="flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-thin pr-2 max-w-[40vw]">
+      <button
+        class="px-4 py-2 rounded-lg border flex-shrink-0"
+        [ngClass]="{
+          'bg-red-600 text-red-100 border-red-100': filtroStatus === '',
+          'bg-red-100 text-red-900 border-red-600': filtroStatus !== ''
+        }"
+        (click)="filtroStatus = ''"
+      >
+        Todos
+      </button>
 
-        <button
-          class="px-4 py-2 rounded-lg border flex-shrink-0"
-          [ngClass]="{
-            'bg-green-800 text-green-100 border-green-100': filtroStatus === StatusFilme.Assistido,
-            'bg-green-100 text-green-800 border-green-800': filtroStatus !== StatusFilme.Assistido
-          }"
-          (click)="filtroStatus = StatusFilme.Assistido"
-        >
-          Assistido
-        </button>
+      <button
+        class="px-4 py-2 rounded-lg border flex-shrink-0"
+        [ngClass]="{
+          'bg-green-800 text-green-100 border-green-100': filtroStatus === StatusFilme.Assistido,
+          'bg-green-100 text-green-800 border-green-800': filtroStatus !== StatusFilme.Assistido
+        }"
+        (click)="filtroStatus = StatusFilme.Assistido"
+      >
+        Assistido
+      </button>
 
-        <button
-          class="px-4 py-2 rounded-lg border flex-shrink-0"
-          [ngClass]="{
-            'bg-yellow-800 text-yellow-100 border-yellow-100': filtroStatus === StatusFilme.NaoAssistido,
-            'bg-yellow-100 text-yellow-800 border-yellow-800': filtroStatus !== StatusFilme.NaoAssistido
-          }"
-          (click)="filtroStatus = StatusFilme.NaoAssistido"
-        >
-          Não Assistido
-        </button>
-      </div>
-
-      <div class="flex justify-end w-full">
-        <button
-          (click)="abrirFormulario()"
-          class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded flex items-center gap-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-        >
-          Adicionar filme
-        </button>
-      </div>
+      <button
+        class="px-4 py-2 rounded-lg border flex-shrink-0"
+        [ngClass]="{
+          'bg-yellow-800 text-yellow-100 border-yellow-100': filtroStatus === StatusFilme.NaoAssistido,
+          'bg-yellow-100 text-yellow-800 border-yellow-800': filtroStatus !== StatusFilme.NaoAssistido
+        }"
+        (click)="filtroStatus = StatusFilme.NaoAssistido"
+      >
+        Não Assistido
+      </button>
     </div>
+  </div>
 
-    <div class="flex justify-between items-center px-4 sm:px-8 py-2">
-      <h1 class="font-sans text-xl">Filmes ></h1>
-    </div>
+  <!-- Botão separado à direita -->
+  <button
+    (click)="abrirFormulario()"
+    class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded flex items-center gap-2 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+  >
+    Adicionar filme
+  </button>
+</div>
 
-    <div *ngIf="mostrarFormulario" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 px-4">
-      <div class="relative w-full max-w-full sm:max-w-lg md:max-w-xl bg-white text-black p-6 sm:p-8 rounded-none sm:rounded-2xl shadow-lg h-full sm:h-auto overflow-auto">
-        <button (click)="mostrarFormulario = false" class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-xl">
-          &times;
-        </button>
+      <div class="flex justify-between items-center px-4 sm:px-8 py-2">
+        <h1 class="font-sans text-xl">Filmes ></h1>
+      </div>
 
-        <h2 class="text-red-600 text-2xl font-semibold mb-6">{{ modoEdicao ? 'Editar Filme' : 'Adicionar Novo Filme' }}</h2>
-
-        <form (ngSubmit)="adicionarFilme()" class="flex flex-col gap-4">
-          <input type="text" placeholder="Digite o título do filme" [(ngModel)]="novoFilme.titulo" name="titulo"
-                 required
-                 class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-black text-base focus:outline-none focus:ring-2 focus:ring-red-500" />
-
-          <textarea placeholder="Digite a descrição do filme" [(ngModel)]="novoFilme.descricao" name="descricao"
-                    class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-black text-base resize-y min-h-[100px] focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
-
-          <div class="flex flex-wrap gap-4 justify-between text-black">
-            <label class="flex items-center gap-2">
-              <input type="radio" [(ngModel)]="novoFilme.status" name="status" [value]="StatusFilme.Assistido" [disabled]="modoEdicao" />
-              Assistido
-            </label>
-
-            <label class="flex items-center gap-2">
-              <input type="radio" [(ngModel)]="novoFilme.status" name="status" [value]="StatusFilme.NaoAssistido" [disabled]="modoEdicao" />
-              Não Assistido
-            </label>
-          </div>
-
-          <button type="submit"
-                  class="self-center mt-4 px-6 py-2 rounded-full bg-red-600 text-white font-medium hover:bg-red-700 transition duration-300">
-            {{ modoEdicao ? 'Editar Filme' : 'Adicionar Filme' }}
+      <div
+        *ngIf="mostrarFormulario"
+        class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 px-4"
+      >
+        <div
+          class="relative w-full max-w-full sm:max-w-lg md:max-w-xl bg-white text-black p-6 sm:p-8 rounded-none sm:rounded-2xl shadow-lg h-full sm:h-auto overflow-auto"
+        >
+          <button
+            (click)="mostrarFormulario = false"
+            class="absolute top-4 right-4 text-gray-500 hover:text-red-600 text-xl"
+            aria-label="Fechar formulário"
+          >
+            &times;
           </button>
-        </form>
-      </div>
-    </div>
 
-    <div class="px-4 sm:px-8 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div *ngFor="let filme of listaFilmesFiltrados(); let i = index" class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-        <div class="p-4">
-          <h3 class="text-xl font-semibold text-red-600 mb-2">{{ filme.titulo }}</h3>
-          <p class="text-gray-800 mb-4 overflow-hidden text-ellipsis line-clamp-3">{{ filme.descricao }}</p>
-          <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold"
-                [ngClass]="{
-              'bg-green-100 text-green-800': filme.status === StatusFilme.Assistido,
-              'bg-yellow-100 text-yellow-800': filme.status === StatusFilme.NaoAssistido
-            }">
-            {{ filme.status === StatusFilme.Assistido ? 'Assistido' : 'Não Assistido' }}
-          </span>
+          <h2 class="text-red-600 text-2xl font-semibold mb-6">
+            {{ modoEdicao ? 'Editar Filme' : 'Adicionar Novo Filme' }}
+          </h2>
 
-          <div class="flex gap-2 mt-4">
-            <button class="p-1" (click)="editarFilme(i)">
-              <img src="assets/images/edit.png" alt="Editar" class="w-5 h-5">
-            </button>
+          <form (ngSubmit)="adicionarFilme()" class="flex flex-col gap-4">
+            <input
+              type="text"
+              placeholder="Digite o título do filme"
+              [(ngModel)]="novoFilme.titulo"
+              name="titulo"
+              required
+              class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-black text-base focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
 
-            <button class="p-1" (click)="excluirFilme(i)">
-              <img src="assets/images/bin.png" alt="Excluir" class="w-5 h-5">
-            </button>
+            <textarea
+              placeholder="Digite a descrição do filme"
+              [(ngModel)]="novoFilme.descricao"
+              name="descricao"
+              class="w-full p-3 rounded-lg border border-gray-300 bg-gray-100 text-black text-base resize-y min-h-[100px] focus:outline-none focus:ring-2 focus:ring-red-500"
+            ></textarea>
 
-            <button class="p-1">
-              <img src="assets/images/share.png" alt="Compartilhar" class="w-5 h-5">
-            </button>
+            <div class="flex flex-wrap gap-4 justify-between text-black">
+              <label class="flex items-center gap-2">
+                <input
+                  type="radio"
+                  [(ngModel)]="novoFilme.status"
+                  name="status"
+                  [value]="StatusFilme.Assistido"
+                  [disabled]="modoEdicao"
+                />
+                Assistido
+              </label>
+
+              <label class="flex items-center gap-2">
+                <input
+                  type="radio"
+                  [(ngModel)]="novoFilme.status"
+                  name="status"
+                  [value]="StatusFilme.NaoAssistido"
+                  [disabled]="modoEdicao"
+                />
+                Não Assistido
+              </label>
+            </div>
 
             <button
-              class="p-1"
-              (click)="alterarStatus(i)"
+              type="submit"
+              class="self-center mt-4 px-6 py-2 rounded-full bg-red-600 text-white font-medium hover:bg-red-700 transition duration-300"
             >
-              <img src="assets/images/arrow.png" alt="Alterar" class="w-5 h-5">
+              {{ modoEdicao ? 'Editar Filme' : 'Adicionar Filme' }}
             </button>
+          </form>
+        </div>
+      </div>
+
+      <div
+        class="px-4 sm:px-8 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
+        <div
+          *ngFor="let filme of listaFilmesFiltrados(); let i = index"
+          class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+        >
+          <div class="p-4">
+            <h3 class="text-xl font-semibold text-red-600 mb-2">{{ filme.titulo }}</h3>
+            <p
+              class="text-gray-800 mb-4 overflow-hidden text-ellipsis line-clamp-3"
+            >
+              {{ filme.descricao }}
+            </p>
+            <span
+              class="inline-block px-3 py-1 rounded-full text-sm font-semibold"
+              [ngClass]="{
+                'bg-green-100 text-green-800': filme.status === StatusFilme.Assistido,
+                'bg-yellow-100 text-yellow-800': filme.status === StatusFilme.NaoAssistido
+              }"
+            >
+              {{ filme.status === StatusFilme.Assistido ? 'Assistido' : 'Não Assistido' }}
+            </span>
+
+            <div class="flex gap-2 mt-4">
+              <button class="p-1" (click)="editarFilme(i)" aria-label="Editar filme">
+                <img src="assets/images/edit.png" alt="Editar" class="w-5 h-5" />
+              </button>
+
+              <button class="p-1" (click)="excluirFilme(i)" aria-label="Excluir filme">
+                <img src="assets/images/bin.png" alt="Excluir" class="w-5 h-5" />
+              </button>
+
+              <button class="p-1" (click)="compartilharFilme(filme.id!)" aria-label="Compartilhar filme">
+                <img src="assets/images/share.png" alt="Compartilhar" class="w-5 h-5" />
+              </button>
+
+              <button class="p-1" (click)="alterarStatus(i)" aria-label="Alterar status do filme">
+                <img src="assets/images/arrow.png" alt="Alterar" class="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

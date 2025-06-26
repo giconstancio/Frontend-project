@@ -26,6 +26,11 @@ export const routes: Routes = [
   },
 
   {
+    path: 'filmes/:id',
+    loadComponent: () => import('./filme-detalhes/filme-detalhes.component').then(c => c.FilmeDetalhesComponent)
+  },
+
+  {
     path: 'logout-page',
     loadComponent: () => import("./auth/logout-page/logout-page.component").then(c => c.LogoutPageComponent)
   },
