@@ -4,18 +4,18 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## 👥 Integrantes
 
-- [@giconstancio](https://github.com/giconstancio)
-- [@mikisazaka](https://github.com/mikisazaka)
-- [@simplicioJoao](https://github.com/simplicioJoao)
+- [Giovana Nunes Constancio](https://github.com/giconstancio)
+- [Graciele Miki Sazaka](https://github.com/mikisazaka)
+- [João Paulo Simplicio](https://github.com/simplicioJoao)
 
-## Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 
 - Angular: Framework front-end
 - HTML5: Marcação da interface
 - TailwindCSS: Estilização
 - TypeScript: Linguagem de programação
 
-## Resumo
+## 📌 Resumo
 
 O projeto **CineTrack** é uma aplicação web desenvolvida com Angular que simula uma lista de filmes interativa. Ele oferece uma experiência simples, porém funcional, de gerenciamento de filmes, permitindo que o usuário adicione, edite, remova, filtre por status (assistido ou não assistido) e compartilhe filmes através de links individuais. Também conta com um sistema de autenticação simulada para organização e controle dos dados.  
 
